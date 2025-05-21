@@ -187,6 +187,7 @@ init_php_install() {
     PHP_URL="https://www.php.net/distributions/php-${PHP_VERSION}.tar.gz"
 
     PHP_INI_DIR="${PHP_INSTALL_DIR}/ini"
+    PHP_ETC_DIR="${PHP_INSTALL_DIR}/etc"
     CONF_DIR="${PHP_INI_DIR}/conf.d"
     mkdir -p "${CONF_DIR}";
 
@@ -258,6 +259,8 @@ install_php() {
 
     cp -v $PHP_SRC_DIR/php.ini-* "$PHP_INI_DIR/";
     cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+    cp -v "$PHP_ETC_DIR/php-fpm.conf.default" "$PHP_ETC_DIR/php-fpm.conf"
+    cp -v "$PHP_ETC_DIR/php-fpm.d/www.conf.default" "$PHP_ETC_DIR/php-fpm.d/www.conf"
 
     # Install xdebug
     "${PHP_INSTALL_DIR}/bin/pecl" install xdebug
