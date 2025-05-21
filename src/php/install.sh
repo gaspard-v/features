@@ -338,7 +338,7 @@ if [ "${PHP_VERSION}" != "none" ]; then
     fi
 
     rm -rf "${PHP_SRC_DIR}"
-    updaterc "if [[ \"\${PATH}\" != *\"${CURRENT_DIR}\"* ]]; then export PATH=\"${CURRENT_DIR}/bin:\${PATH}\"; fi"
+    updaterc "if [[ \"\${PATH}\" != *\"${CURRENT_DIR}\"* ]]; then export PATH=\"${CURRENT_DIR}/bin:${CURRENT_DIR}/sbin:\${PATH}\"; fi"
 
     chown -R "${USERNAME}:php" "${PHP_DIR}"
     chmod -R g+r+w "${PHP_DIR}"
