@@ -14,7 +14,8 @@
             },
             "extensions": [
                 "mads-hartmann.bash-ide-vscode",
-                "redhat.vscode-yaml"
+                "redhat.vscode-yaml",
+                "GitHub.vscode-github-actions"
             ]
         }
     },
