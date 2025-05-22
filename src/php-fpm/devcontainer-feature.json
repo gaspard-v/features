@@ -1,7 +1,7 @@
 {
-    "id": "php",
-    "version": "1.1.5",
-    "name": "PHP",
+    "id": "php-fpm",
+    "version": "1.0.0",
+    "name": "PHP FPM",
     "documentationURL": "https://github.com/devcontainers/features/tree/main/src/php",
     "options": {
         "version": {
