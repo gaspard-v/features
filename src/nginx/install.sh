@@ -5,6 +5,10 @@ set -eEuo pipefail
 NGINX_VERSION="${VERSION:-"mainline"}"
 CONFIG_PHP_FPM="${ENABLE_PHP_FPM:-"true"}"
 
+DEBIAN_DEPENDENCIES="debian-archive-keyring"
+UBUNTU_DEPENDENCIES="ubuntu-keyring"
+
+
 export DEBIAN_FRONTEND=noninteractive
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -14,18 +18,34 @@ fi
 
 install_nginx() {
 
-    local nginx_package_str="http://nginx.org/packages/${NGINX_VERSION}/debian"
+    local nginx_package_str=""
+    local distribution=""
+    local dependencies=""
 
-    if [ "stable" = "$NGINX_VERSION" ]; then
-        nginx_package_str="http://nginx.org/packages/debian"
-    fi
-
+    apt update -y
     apt install -y --no-install-recommends \
         curl \
         gnupg2 \
         ca-certificates \
-        lsb-release \
-        debian-archive-keyring
+        lsb-release
+
+    distribution="$(lsb-release -si)"
+    if [ "Debian" = "$distribution" ]; then
+        dependencies="$DEBIAN_DEPENDENCIES"
+        distribution="debian"
+    fi
+
+    if [ "Ubuntu" = "$distribution" ]; then
+        dependencies="$UBUNTU_DEPENDENCIES"
+        distribution="ubuntu"
+    fi
+    apt install -y --no-install-recommends "$dependencies"
+
+    nginx_package_str="http://nginx.org/packages/${NGINX_VERSION}/${distribution}"
+
+    if [ "stable" = "$NGINX_VERSION" ]; then
+        nginx_package_str="http://nginx.org/packages/${distribution}"
+    fi
 
     curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
     | tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
