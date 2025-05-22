@@ -3,6 +3,7 @@
 set -eEuo pipefail
 
 NGINX_VERSION="${VERSION:-"mainline"}"
+CONFIG_PHP_FPM="${ENABLE_PHP_FPM:-"true"}"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -43,4 +44,19 @@ install_nginx() {
     apt install -y --no-install-recommends nginx 
 }
 
+config-php-fpm() {
+    local confDir=""
+    local defaultFile=""
+
+    confDir="/etc/nginx/conf.d"
+    defaultFile="$confDir/default.conf"
+
+    rm -f "$defaultFile"
+    cp -v "fpm.conf" "$defaultFile"
+}
+
 install_nginx
+
+if [ "true" = "$CONFIG_PHP_FPM" ]; then
+    config-php-fpm
+if

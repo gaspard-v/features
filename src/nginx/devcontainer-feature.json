@@ -3,8 +3,7 @@
     "version": "1.0.0",
     "name": "nginx",
     "documentationURL": "https://github.com/gaspard-v/features/tree/main/src/nginx",
-    "options": {},
-    "customizations": {
+    "options": {
         "version": {
             "type": "string",
             "enum": [
@@ -13,9 +12,16 @@
             ],
             "default": "mainline",
             "description": "Select or enter a nginx version"
+        },
+        "enablePhpFpm": {
+            "type": "boolean",
+            "default": true,
+            "description": "configure php-fpm websites support"
         }
     },
+    "customizations": {},
     "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/gaspard-v/features/php-fpm"
     ]
 }
