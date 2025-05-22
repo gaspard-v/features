@@ -1,6 +1,6 @@
 {
     "id": "php",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "name": "PHP",
     "documentationURL": "https://github.com/devcontainers/features/tree/main/src/php",
     "options": {
@@ -41,7 +41,7 @@
     },
     "containerEnv": {
         "PHP_PATH": "/usr/local/php/current",
-        "PATH": "/usr/local/php/current/bin:${PATH}"
+        "PATH": "/usr/local/php/current/bin:/usr/local/php/current/sbin:${PATH}"
     },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
