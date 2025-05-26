@@ -1,6 +1,6 @@
 {
     "id": "nginx",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "name": "nginx",
     "documentationURL": "https://github.com/gaspard-v/features/tree/main/src/nginx",
     "options": {
