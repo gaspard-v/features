@@ -29,7 +29,7 @@ install_nginx() {
         ca-certificates \
         lsb-release
 
-    distribution="$(lsb-release -si)"
+    distribution="$(lsb_release -si)"
     if [ "Debian" = "$distribution" ]; then
         dependencies="$DEBIAN_DEPENDENCIES"
         distribution="debian"
@@ -79,4 +79,4 @@ install_nginx
 
 if [ "true" = "$CONFIG_PHP_FPM" ]; then
     config-php-fpm
-if
+fi
